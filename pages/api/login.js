@@ -13,7 +13,7 @@ export default async function handler(req, res){
                 })
             }
             else if(response === false){
-                res.status(200).json({
+                res.status(401).json({
                     authentication : "not verified"
                 })
             }
