@@ -40,8 +40,11 @@ export async function verifyUser(username, password) {
 export async function createUser(username, password){
     const salt_round = 10;
     const hased_password = bcrypt.hashSync(password, salt_round);
-
-    return db.collection('verification').doc(username).set({
-        password: hased_password
-    }, {merge: false})
+    const entryRef = db.collection("verification").doc(username);
+    const doc = await entryRef.get();
+    if(!doc.exists){
+      return db.collection('verification').doc(username).set({
+          password: hased_password
+      }, {merge: false})
+    }
 }
