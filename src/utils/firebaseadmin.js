@@ -43,5 +43,5 @@ export async function createUser(username, password){
 
     return db.collection('verification').doc(username).set({
         password: hased_password
-    })
+    }, {merge: false})
 }
